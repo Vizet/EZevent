@@ -1,0 +1,603 @@
+/*
+	SDO UI kit\
+	disigned by Levchenko Alexandra
+	coded by Omelnitskiy Roman.
+*/
+
+
+body {
+    background-color: #ECEFF1 !important;
+}
+
+/* Модельное окно и прогрес бар*/
+.overlay{
+	display: none;
+	z-index: 1000;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	background: rgba(0, 0, 0, 0.8) none repeat scroll 0% 0%;
+}
+.modal{
+	display: none;
+	z-index: 99999;
+	position: fixed;
+	left: 50%;
+    top: 40%;
+	transform: translate(-50%, -50%);
+	padding: 32px 16px;
+	background: white none repeat scroll 0% 0%;
+	box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14),0 3px 14px 2px rgba(0,0,0,0.12),0 5px 5px -3px rgba(0,0,0,0.3);
+}
+.cls-modal-btn{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	font-size: 32px;
+	cursor: pointer;
+}
+.cls-modal-btn:hover{
+	color: #f44336;
+}
+
+.progress{
+	display: none;
+	z-index: 99999;
+	position: fixed;
+	left: 50%;
+    top: 50%;
+	transform: translate(-50%, -50%);
+	width: 500px;
+	height: 40px;
+	padding: 8px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 6px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25), 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.progress .progress-bar{
+	background-color: #f27011;
+	width: 25%;
+	height: 100%;
+    border-radius: 4px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.05));
+    transition: 0.4s linear;
+    transition-property: width, background-color;
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25), inset 0 1px rgba(255, 255, 255, 0.1);
+}
+
+
+/* Material карточка */
+.userCard{
+	margin: 24px;
+	padding: 16px 24px;
+	box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+	background-color: white;
+	transition: all .3s;
+	position: relative;
+	max-width: 500px;
+}
+.userCard:hover{
+	box-shadow: 0 7px 11px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn{
+	height: 32px;
+	width: 32px;
+	border-radius: 50%;
+	position: absolute;
+	top: -16px;
+	right: -16px;
+	cursor: pointer;
+	background-color: #e53935;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+	transition: all .1s;
+}
+.close-btn:hover{
+	box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
+	background-color: #c62828;
+}
+.close-btn::before{
+	content: "";
+	width: 50%;
+	height: 2px;
+	position: absolute;
+	background: white;
+	transform: translateX(-50%) translateY(-50%) rotate(45deg);
+	top: 50%;
+	left: 50%;
+	border-radius: 2px;
+}
+.close-btn::after{
+	content: "";
+	width: 50%;
+	height: 2px;
+	position: absolute;
+	background: white;
+	transform: translateX(-50%) translateY(-50%)  rotate(135deg);
+	top: 50%;
+	left: 50%;
+	border-radius: 2px;
+}
+
+/* Обертка для каждого поля ввода */
+.mfield:first-of-type{
+	margin-top: 30px !important;
+}
+
+.mfield{
+	text-align: left;
+	position: relative;
+	margin: 0 0 32px 0;
+	min-width: 400px;
+}
+
+.mi-label, .ms-label{
+	color: #999;
+}
+
+
+/* Подчеркивание для select и input[text]*/
+.bar {
+    position: relative;
+    height: 2px;
+	bottom: 3px;
+	width: 0;
+	margin: 0 auto;
+    background: #007ee5;
+    transition: .2s ease all;
+}
+
+input:-moz-ui-invalid:not(output), select:-moz-ui-invalid:not(output){
+	box-shadow: none;
+}
+
+/*	Кастомный селект	*/
+.ms{
+    padding: 10px 10px 10px 5px;
+    color: #333;
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+    font-size: 16px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #d0dce7;
+    box-sizing: border-box;
+	outline: none;
+	cursor: pointer;
+	-moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.ms:disabled{
+	cursor: no-drop;
+	order-bottom: 1px solid #d0dce7;
+}
+.ms option:first-of-type{
+	display: none;
+}
+
+.ms option {
+    outline: 0;
+    border: none;
+	font-size: 15px;
+}
+.open-select-icon{
+	font-size: 10px;
+    position: absolute;
+    top: 46%;
+    right: 9px;
+    transform: translateY(-50%);
+    transition: transform .3s;
+    color: #007ee5;
+	cursor: pointer;
+}
+.ms:focus ~ .open-select-icon{
+	transform: translateY(-50%) rotate(180deg);
+}
+.ms:focus ~ label, .ms:valid ~ label, .ms:disabled ~ label {
+    top: -20px !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+	color: #007ee5;
+}
+.ms-label {
+	cursor: pointer;
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: .2s ease all;
+}
+
+.ms.showValid:invalid ~ .bar{
+	width: 100%;
+	background-color: #e53935;
+}
+.ms.showValid:invalid ~ .open-select-icon{
+	color: #e53935;
+}
+.ms:focus ~ .bar, .ms:valid ~ .bar, .ms:disabled ~ .bar{
+    width: 100%;
+}
+
+/*	material input	*/
+
+.mi {
+    padding: 10px 10px 10px 5px;
+    color: #333;
+    font-family: "Open Sans", sans-serif;
+    width: 100%;
+    font-size: 16px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #d0dce7;
+    box-sizing: border-box;
+}
+.mi:focus {
+    outline: none;
+}
+.mi:focus ~ label, .mi:valid ~ label{
+    top: -20px !important;
+    font-size: 12px !important;
+    text-transform: uppercase;
+	color: #007ee5;
+}
+.mi-label {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: .2s ease all;
+}
+.mi.showValid:invalid ~ .bar{
+	width: 100%;
+	background-color: #e53935;
+}
+.mi:focus ~ .bar, .mi:valid ~ .bar{
+    width: 100%;
+}
+
+/* material checkbox */
+.mc{
+	display: none;
+}
+.mc-label {
+	font-family: "Open Sans", sans-serif;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    display: inline-block;
+    height: 25px;
+    line-height: 25px;
+    font-size: 1rem;
+	margin-left: 16px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.mc-label::before, .mc + label::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    z-index: 0;
+    border: 2px solid #5a5a5a;
+    border-radius: 1px;
+    margin-top: 2px;
+    -webkit-transition: .2s;
+    transition: .2s;
+	outline: 1px solid transparent
+}
+.mc:checked + .mc-label::before, .mc:checked + .mc-label::after{
+    top: -4px;
+    left: -5px;
+    width: 12px;
+    height: 22px;
+    border-top: 2px solid transparent;
+    border-left: 2px solid transparent;
+    border-right: 2px solid #26a69a;
+    border-bottom: 2px solid #26a69a;
+    transform: rotate(40deg);
+    backface-visibility: hidden;
+    transform-origin: 100% 100%;
+}
+
+
+/* Switch */
+.slabel{
+	font-size: 16px;
+}
+
+.switch{
+	display: flex;
+	align-items: center;
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	transform: translateY(-50%);
+	height: 2.5em;
+	cursor: pointer;
+}
+
+.msw {
+	 display: none;
+}
+
+
+.switchbar {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 15px;
+    background-color: #818181;
+    border-radius: 15px;
+    margin-right: 10px;
+    transition: background 0.3s ease;
+    vertical-align: middle;
+    margin: 0 16px;
+}
+
+.switchbar::after{
+    content: "";
+    position: absolute;
+    display: inline-block;
+    width: 21px;
+    height: 21px;
+    background-color: #F1F1F1;
+    border-radius: 21px;
+    box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.4);
+    left: -5px;
+    top: -3px;
+    transition: left 0.3s ease, background .3s ease, box-shadow 0.1s ease;
+}
+
+.msw:checked ~ .switchbar {
+    background-color: rgba(244, 67, 54, 0.6);
+}
+
+.msw:checked ~ .switchbar::after{
+    background-color: #f44336;
+	left: 24px;
+}
+
+
+/*	Кнопка добавить	*/
+
+.add-btn{
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background-color: #DB4437;
+	position: relative;
+	transition: .3s;
+	cursor: pointer;
+	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 1px 5px 0 rgba(0,0,0,0.12),0 3px 1px -2px rgba(0,0,0,0.2);
+}
+.add-btn:hover{
+	box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
+	background-color: #c62828;
+
+}
+
+.add-btn::before{
+	content: "";
+	width: 14px;
+	height: 2px;
+	position: absolute;
+	background: white;
+	transform: translateX(-50%) translateY(-50%) rotate(90deg);
+	top: 50%;
+	left: 50%;
+}
+.add-btn::after{
+	content: "";
+	width: 14px;
+	height: 2px;
+	position: absolute;
+	background: white;
+	transform: translateX(-50%) translateY(-50%);
+	top: 50%;
+	left: 50%;
+}
+.add-btn-wrap{
+	display: flex;
+	width: 300px;
+	font-family: "Open Sans", sans-serif;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	margin-left: 16px;
+	width: -moz-min-content;
+	width: min-content;
+}
+.add-btn-wrap:hover .add-btn{
+	box-shadow: 0 3px 3px 0 rgba(0,0,0,0.14),0 1px 7px 0 rgba(0,0,0,0.12),0 3px 1px -1px rgba(0,0,0,0.2);
+}
+.add-btn-text{
+	padding: 10px;
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+}
+
+
+
+
+/*
+	ИНФОРМАЦИОННЫЕ ПАНЕЛИ
+*/
+.message h2{
+	font-weight: 100;
+	font-size: 30pt;
+	line-height: 1.3em;
+	margin: 15px 0;
+	color: inherit;
+	border: none;
+	background: transparent;
+}
+.message p{
+	text-align: left;
+}
+
+.message h2{
+	font-weight: 100;
+	font-size: 30pt;
+	line-height: 1.3em;
+	margin: 15px 0;
+	color: inherit;
+	border: none;
+	background: transparent;
+}
+.message p{
+	text-align: left;
+}
+
+div.message {
+	font-family: "Open Sans", sans-serif;
+	position: relative;
+	padding: 10px;
+	padding-left: 35px;
+	margin: 30px 10px;
+	box-shadow:0 2px 5px rgba(0,0,0,.3);
+	transition: all .5s ease;
+}
+div.message:hover{
+	box-shadow: 0 15px 20px rgba(10,0,10,.3);
+}
+
+div.message:before{
+	content: '';
+	font-family: FontAwesome;
+	position: absolute;
+	display: block;
+	top: -21px;
+	left: 50%;
+	margin:0 -21px;
+	font-size: 20px;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	padding:10px;
+	background: inherit;
+	box-shadow: 0 5px 10px rgba(0,0,0,.25);
+	color: rgba(0,0,0,.75);
+	border-radius:50%;
+	border: 2px solid transparent;
+	z-index: 2;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+div.message.warning:before{
+	background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDQwMS45OTkgNDAxLjk5OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDAxLjk5OSA0MDEuOTk4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTIzNy41NDMsMzAxLjQ5OWgtNzMuMDkxYy00Ljk1LDAtOS4yMzMsMS44MTEtMTIuODUxLDUuNDI1Yy0zLjYxNSwzLjYxNy01LjQyNCw3Ljg5Ny01LjQyNCwxMi44NDd2NjMuOTUzICAgIGMwLDQuOTQ4LDEuODA5LDkuMjMyLDUuNDI0LDEyLjg1NGMzLjYyMSwzLjYxLDcuOSw1LjQyMSwxMi44NTEsNS40MjFoNzMuMDk3YzQuOTQyLDAsOS4yMjctMS44MTEsMTIuODQ4LTUuNDIxICAgIGMzLjYxLTMuNjIxLDUuNDItNy45MDUsNS40Mi0xMi44NTR2LTYzLjk1M2MwLTQuOTQ5LTEuODEzLTkuMjI5LTUuNDI3LTEyLjg0N0MyNDYuNzczLDMwMy4zMDcsMjQyLjQ4OCwzMDEuNDk5LDIzNy41NDMsMzAxLjQ5OXoiIGZpbGw9IiNGRkZGRkYiLz4KCQk8cGF0aCBkPSJNMjU5LjM4Myw1LjQyNEMyNTUuODYyLDEuODEyLDI1MS42MjgsMCwyNDYuNjc2LDBoLTkxLjM1OWMtNC45NDgsMC05LjE4LDEuODEyLTEyLjcwMyw1LjQyNCAgICBjLTMuNTIxLDMuNjE3LTUuMTg2LDcuOTAyLTQuOTk2LDEyLjg1bDcuOTkyLDIxOS4yNjVjMC4xOSw0Ljk0OCwyLjEzOSw5LjIzNiw1Ljg1MiwxMi44NDdjMy43MTEsMy42MjEsOC4wNDEsNS40MzEsMTIuOTkxLDUuNDMxICAgIGg3My4wOTdjNC45NDIsMCw5LjI3MS0xLjgxLDEyLjk5MS01LjQzMWMzLjcxLTMuNjEsNS42NTMtNy44OTgsNS44NTItMTIuODQ3bDcuOTg3LTIxOS4yNjUgICAgQzI2NC41NzgsMTMuMzI2LDI2Mi45MDUsOS4wNDUsMjU5LjM4Myw1LjQyNHoiIGZpbGw9IiNGRkZGRkYiLz4KCTwvZz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+}
+div.message.success:before{
+	background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDQ0Mi41MzMgNDQyLjUzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQyLjUzMyA0NDIuNTMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPHBhdGggZD0iTTQzNC41MzksOTguNDk5bC0zOC44MjgtMzguODI4Yy01LjMyNC01LjMyOC0xMS43OTktNy45OTMtMTkuNDEtNy45OTNjLTcuNjE4LDAtMTQuMDkzLDIuNjY1LTE5LjQxNyw3Ljk5M0wxNjkuNTksMjQ3LjI0OCAgIGwtODMuOTM5LTg0LjIyNWMtNS4zMy01LjMzLTExLjgwMS03Ljk5Mi0xOS40MTItNy45OTJjLTcuNjE2LDAtMTQuMDg3LDIuNjYyLTE5LjQxNyw3Ljk5Mkw3Ljk5NCwyMDEuODUyICAgQzIuNjY0LDIwNy4xODEsMCwyMTMuNjU0LDAsMjIxLjI2OWMwLDcuNjA5LDIuNjY0LDE0LjA4OCw3Ljk5NCwxOS40MTZsMTAzLjM1MSwxMDMuMzQ5bDM4LjgzMSwzOC44MjggICBjNS4zMjcsNS4zMzIsMTEuOCw3Ljk5NCwxOS40MTQsNy45OTRjNy42MTEsMCwxNC4wODQtMi42NjksMTkuNDE0LTcuOTk0bDM4LjgzLTM4LjgyOEw0MzQuNTM5LDEzNy4zMyAgIGM1LjMyNS01LjMzLDcuOTk0LTExLjgwMiw3Ljk5NC0xOS40MTdDNDQyLjUzNywxMTAuMzAyLDQzOS44NjQsMTAzLjgyOSw0MzQuNTM5LDk4LjQ5OXoiIGZpbGw9IiNGRkZGRkYiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K);
+	
+}
+div.message.information:before{
+	background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTYuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjI0cHgiIGhlaWdodD0iMjRweCIgdmlld0JveD0iMCAwIDQwMS45OTggNDAxLjk5OCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDAxLjk5OCA0MDEuOTk4OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+CjxnPgoJPGc+CgkJPHBhdGggZD0iTTE2NC40NTQsOTEuMzYzaDczLjA5OGM0Ljk0NSwwLDkuMjI2LTEuODA3LDEyLjg0Ny01LjQyNGMzLjYxLTMuNjE0LDUuNDIxLTcuODk4LDUuNDIxLTEyLjg0N1YxOC4yNzQgICAgYzAtNC45NDgtMS44MTEtOS4yMjktNS40MjgtMTIuODVDMjQ2Ljc3NywxLjgxMiwyNDIuNDksMCwyMzcuNTQ0LDBoLTczLjA5MWMtNC45NDYsMC05LjIyOSwxLjgxMi0xMi44NDcsNS40MjQgICAgYy0zLjYxNSwzLjYxNy01LjQyNCw3LjkwMi01LjQyNCwxMi44NXY1NC44MThjMCw0Ljk0OSwxLjgwOSw5LjIzMyw1LjQyNCwxMi44NDdDMTU1LjIyNCw4OS41NTYsMTU5LjUwNyw5MS4zNjMsMTY0LjQ1NCw5MS4zNjN6IiBmaWxsPSIjMDAwMDAwIi8+CgkJPHBhdGggZD0iTTI4Ni45MzYsMzM0LjMzMWMtMy42MTMtMy42MTctNy44OTctNS40MjctMTIuODQ3LTUuNDI3aC0xOC4yNzRWMTY0LjQ1MmMwLTQuOTQ3LTEuODA3LTkuMjI5LTUuNDIxLTEyLjg0NSAgICBjLTMuNjItMy42MTctNy45MDQtNS40MjYtMTIuODQ3LTUuNDI2SDEyNy45MTJjLTQuOTQ5LDAtOS4yMzEsMS44MDktMTIuODQ3LDUuNDI2Yy0zLjYxOCwzLjYxNi01LjQyNCw3Ljg5OC01LjQyNCwxMi44NDV2MzYuNTQ3ICAgIGMwLDQuOTQ2LDEuODA3LDkuMjMxLDUuNDI0LDEyLjg0NWMzLjYxNSwzLjYyMSw3Ljg5OCw1LjQyOCwxMi44NDcsNS40MjhoMTguMjc0djEwOS42MzNoLTE4LjI3NCAgICBjLTQuOTQ5LDAtOS4yMzEsMS44MS0xMi44NDcsNS40MjdjLTMuNjE4LDMuNjE0LTUuNDI0LDcuODk4LTUuNDI0LDEyLjg0N3YzNi41NDZjMCw0Ljk0OCwxLjgwNyw5LjIzMiw1LjQyNCwxMi44NTQgICAgYzMuNjE1LDMuNjEsNy44OTgsNS40MjEsMTIuODQ3LDUuNDIxaDE0Ni4xNzdjNC45NDksMCw5LjIzMy0xLjgxMSwxMi44NDctNS40MjFjMy42MTQtMy42MjEsNS40MjEtNy45MDUsNS40MjEtMTIuODU0di0zNi41NDYgICAgQzI5Mi4zNTcsMzQyLjIyOSwyOTAuNTYsMzM3Ljk0NSwyODYuOTM2LDMzNC4zMzF6IiBmaWxsPSIjMDAwMDAwIi8+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==);
+}
+
+
+div.message.information{
+	background: #FFF;
+}
+
+div.message.warning{
+	background: #E74;
+	color: #FFF;
+}
+div.message.success{
+	background: #5A6;
+	color: #FFF;
+}
+
+.big-button{
+	font-size: 45px;
+	font-family: Segoe UI;
+	text-align: center;
+	line-height: 1.4em;
+	color: #fff;
+	margin: 45px auto;
+	width: 340px;
+	height: 75px;
+	background: linear-gradient(#1d7751, #0e382c);
+	border: 3px #25793b solid;
+	border-radius: 5px;
+	text-shadow: 0 0 20px rgba(255,255,255,0.3);
+	transition: .1s;
+	transform: scale(1);
+	cursor: pointer;
+	-webkit-user-select: none;
+	box-shadow: 0 0 20px rgba(0,117,9,0.5);
+	overflow: hidden;
+}
+
+.big-button:hover {
+	text-shadow: 0 0 20px rgba(255,255,255,0.5);
+	transform: scale(1.05);
+}
+
+.big-button:active {
+	background: linear-gradient(#1f8258, #114435);
+	text-shadow: 0 0 20px rgba(255,255,255,0.5);
+	transform: scale(1);
+	box-shadow: 0 0 75px rgba(43,137,68,0.5);
+}
+
+.big-button:after {
+	content: "";
+	position: relative;
+	top: -120px;
+	left: -90px;
+	display: block;
+	width: 35px;
+	height: 150px;
+	background: rgba(255, 255, 255, 0.5);
+	transform: rotate(35deg);
+	filter: blur(20px);
+	-webkit-filter: blur(20px);
+	transition: none;
+}
+
+.big-button:hover:after {
+	left: 400px;
+	transition: .3s ease-in-out;
+}
+
+.exitBtn {
+	display: block;
+    line-height: 1.3em;
+	position: relative;
+	padding: 12px 24px;
+	border: 0;
+	margin: 10px;
+	cursor: pointer;
+	border-radius: 4px;
+	text-transform: uppercase;
+	text-decoration: none;
+	outline: none !important;
+	transition: all 0.2s ease-out 0;
+	background: #d32f2f;
+	font-size: 21px;
+	font-family: Open Sans;
+	color: #FFF;
+	margin: 0px auto;
+}
+
+.exitBtn:hover{
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+	background-color: #d74444 !important;
+}

@@ -1,0 +1,32 @@
+body {
+    background: #eee;
+    font-family: Segoe UI, sans-serif !important;
+    margin: 0 !important;
+}
+
+#footer{
+    display: none;
+}
+
+/*@font-face {
+  font-family: 'DSDIGI';
+  src: url('https://sdo.corp.tander.ru/file.php/5027/DJB_Get_Digital.ttf')  format('truetype');
+}*/
+
+/* Оставил здесь потому, что это используется на 2х страницах на первой странице с мероприятиями и на странице статистики */
+.event-count {
+    /*! font-family: 'DSDIGI'; */
+    font-size: 40px;
+    line-height: 1em;
+    padding: 0px 0px 2px;
+    font-weight: bold;
+    /*! color: #555; */
+    position: relative;
+    left: 6px;
+}
+
+.event-space{
+    font-size: 20px;
+    text-align: center;
+    /*!  */
+}
