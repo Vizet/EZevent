@@ -1,11 +1,14 @@
 <template>
-	<div class='event-form'>
-		<div class='add-btn-wrap'>
+	<!-- Форма редактирования мероприятий -->
+	<div class="event-form">
+		<!-- Добавить мероприятие -->
+		<div class="add-btn-wrap">
 			<div class="add-btn" @click="addEvent"></div>
 		</div>
 
-		<div class='card-wrap'>
-			<div class='event-card userCard' v-for="(el, index) in events">
+		<!-- Обёртка для полей ввода -->
+		<div class="card-wrap">
+			<div class="event-card userCard" v-for="(el, index) in events">
 				<text-field label="Название" v-model="el.name"/>
 				<text-field label="Описание" v-model="el.description"/>
 				<text-field label="Лимит людей" v-model="el.userLimit"/>
@@ -13,13 +16,12 @@
 				<text-field label="Место" v-model="el.place"/>
 				<text-field label="Дата" v-model="el.date"/>
 
-				<div class='close-btn' @click='removeEvent(index)'></div>
+				<div class="close-btn" @click="removeEvent(index)"></div>
 			</div>
 		</div>
 
-		<button @click="sendEventData">Отправить</button>
-		
-		
+		<!-- Кнопка отправить форму -->
+		<button @click="sendEventData">Отправить</button>		
 	</div>
 	
 </template>
@@ -30,26 +32,27 @@ import textField from '@/components/eventFormPage/textField'
 
 export default {
 	name: 'eventForm',
-	props: ['events'],
+	props: ['events'], // должны приходить через Vuex
 	components: {
 	    textField: textField
 	},
-	data: function () {
+	data () {
 		return {
-			loadedFlag: false,
+			//loadedFlag: false, // Не используется?
 		}
 	},
 	computed: {
-		/* Не используется в шаблоне. Удалить? */
+		/* Не используется в этом компоненте. Удалить? */
 		/*freeSpace: function(){
 			var free = this.event.userLimit - this.event.currentNum;
 			return  free > 0 ? free : 0;
 		}*/
 	},
-	created: function(){
+	created: function() {
 
 	},
 	methods: {
+		// добавить мероприятие
 		addEvent: function(){
 			this.$root.events.push({
 				name: '',
@@ -60,6 +63,8 @@ export default {
 				date: '',
 			});
 		},
+
+		// удалить мероприятие
 		removeEvent: function(index){
 			if(confirm('Удалить мероприятие? Изменения будут применены только после сохранения')){
 				this.$root.events.splice(index, 1)
@@ -87,6 +92,10 @@ export default {
 </script>
 
 <style scoped>
+/*
+  Стили обёрток
+*/
+
 .card-wrap {
 	display: flex;
 	flex-wrap: wrap;

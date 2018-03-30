@@ -1,10 +1,9 @@
 <template>
-	<div class='stat'>
+	<div class="stat">
 		<div class="widget-wrap">
 			<div class="widget">
-				<div class='event-space'>
-					<div class='event-count'>
-						<!--<animated-integer v-bind:value="10"></animated-integer>-->
+				<div class="event-space">
+					<div class="event-count">
 						<animate-number
 					      from="0" 
 					      :to="10" 
@@ -19,9 +18,8 @@
 			</div>
 
 			<div class="widget req-count">
-				<div class='event-space'>
-					<div class='event-count'>
-						<!--<animated-integer :value="requestCount"></animated-integer>-->
+				<div class="event-space">
+					<div class="event-count">
 						<animate-number
 					      from="0" 
 					      :to="requestCount" 
@@ -36,9 +34,8 @@
 			</div>
 
 			<div class="widget req-percent">
-				<div class='event-space'>
-					<div class='event-count'>
-						<!--<animated-integer v-bind:value="70" symbol="%"></animated-integer>-->
+				<div class="event-space">
+					<div class="event-count">
 						<animate-number
 					      from="0" 
 					      :to="70" 
@@ -54,10 +51,12 @@
 		</div>
 
 		<div class="chart-wrap">
-			<canvas id="myChart" class='chart-wrap'></canvas>
+			<canvas id="myChart" class="chart-wrap"></canvas>
 		</div>
 
 		<button @click="openNewModal">123435</button>
+
+		<!-- Модуль vue form generator. Пока не используется -->
 		<!-- <json-form :schema="formSchema"/> -->
 		<!-- <vue-form-generator :schema="schema" :model="modelObj" :options="formOptions"></vue-form-generator> -->
 	</div>
@@ -67,16 +66,10 @@
 import axios from 'axios'
 import chart from 'chart.js'
 
-//Vue.component('statPanel', {
-	// props: ['label', 'value'],
-	//template: '#stat-template',
-    //components:{
-    //	
-    //},
 export default {
 	name: 'stat',
-	props: ['events'],
-	data: function () {
+	props: ['events'], // должны приходить через Vuex
+	data () {
 		return {
 			requestCount: 0,
 			evArr: [],
@@ -92,7 +85,7 @@ export default {
 					}
 				]
 			},
-			optionObj: {
+			optionObj: { // данные для Chart.js
 				scales: {
 		            xAxes: [{
 		            	type: 'time',
@@ -119,7 +112,7 @@ export default {
 		        responsive: false,
 		        maintainAspectRatio: false
 			},
-			/*schema: {
+			/*schema: { // Это данные для Vue form generator, мы его пока не используем
 	            fields: [{
 		                type: "input",
 						inputType: "text",
@@ -183,7 +176,7 @@ export default {
 						textOff: "Inactive"
 		            }
 	            ]
-	        },*/
+	        },
 	        fields: ['name', 'email','birthdate','nickname','gender','__slot:actions'],
 	  		modelObj: {
 	            id: 1,
@@ -197,7 +190,7 @@ export default {
 	        formOptions: {
 	            validateAfterLoad: true,
 	            validateAfterChanged: true
-	        }
+	        }*/
 
 	  	}
 	},
@@ -280,6 +273,7 @@ export default {
 		});
 	},
 	methods: {
+		// Открыть модалку. Vuedals пока не подключен
 		openNewModal() {
             this.$vuedals.open({
                 title: 'Cutie',
@@ -291,6 +285,7 @@ export default {
                 }
             })
         },
+        // Функция модуля animate number, добавляющая дробные промежутки
         /*formatter: function (num) {
 	        return num.toFixed(2)
 	    },*/
@@ -302,92 +297,93 @@ export default {
 </script>
 
 <style scoped>
-.widget-wrap{
-	display: flex;
-	
+/*
+  Стили виджетов со статистикой
+*/
+
+.widget-wrap {
+	display: flex;	
 	justify-content: space-between;
 	width: 67%;
 	margin: auto;
-	/*color: #34495e;*/
 }
 
-.widget{
+.widget {
 	background: #fff;
 	box-shadow: 0 4px 70px -18px #707070;
 	margin-bottom: 1.875rem;
 	flex: 0 0 290px;
 	padding: 1.5625rem;
-	/*! flex: 0 0 22%; */
 	box-sizing: border-box;
 	font-family: "Source Sans Pro",sans-serif;
 	color: #444;
 }
 
-.widget.req-count{
+.widget.req-count {
 	background-color: #e34a4a;
 	color: white;
 }
 
-.widget.req-percent{
+.widget.req-percent {
 	background-color: #4ab2e3;
 	color: white;
-
 }
 
-.stat{
+/*
+  Стили обёртки
+*/
+
+.stat {
 	padding: 32px 16px 16px 16px;
 }
 
-.req-wrap{
-
+/* Что это за стили? */
+/*.req-wrap { 
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
-	padding: 0 16px;
-	
+	padding: 0 16px;	
 	color: white;
 }
 
 
-.req-wrap .number-req{
-	
+.req-wrap .number-req {	
 	display: flex;
 	flex-direction: column;
 	text-align: center;
 }
 
-.req-wrap .number-req .number{
-	
+.req-wrap .number-req .number {	
 	font-size: 50px;
 	line-height: 1em;
 }
 
-.req-wrap.number-req .label{
-	
+.req-wrap.number-req .label {	
 	position: relative;
 	top: -8px;
 }
 
-.req-wrap .progress-wrap{
-	
+.req-wrap .progress-wrap {	
 	align-self: center;
 	padding: 10px 0px;
 }
 
-.req-wrap .req-percent{
+.req-wrap .req-percent {
 	font-size: 16px;
 	font-weight: bold;
 	position: relative;
 	right: -4px;
-}
+}*/
 
-.chart-wrap{
+/*
+  Стили графика
+*/
+
+.chart-wrap {
 	position: relative;
 	width: 950px;
 	margin: auto;
-	/*! background-color: white; */
-	margin-top: 16px;
-	
+	margin-top: 16px;	
 }
 </style>

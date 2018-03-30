@@ -1,19 +1,22 @@
 <template>
-	<div class='event' :class="{active: event.haveRequest}">
-		<div class='event-head'>
+	<!-- Карточка события -->
+	<div class="event" :class="{active: event.haveRequest}">
+		<!-- Название события -->
+		<div class="event-head">
 			{{event.name}}
 		</div>
 
-		<div class='event-body' :class="{active: !event.haveRequest}">
-			<div class='event-info'>
+		<!-- Информация о событии -->
+		<div class="event-body" :class="{active: !event.haveRequest}">
+			<div class="event-info">
 				<div>{{event.place}}</div>
 				<div>{{event.date}}</div>
 				<div>Всего мест: {{event.userLimit}}</div>
 			</div>
 
-			<div class='event-space'>
+			<div class="event-space">
 				Осталось
-				<div class='event-count'>
+				<div class="event-count">
 					<animate-number
 				      from="0" 
 				      :to="freeSpace" 
@@ -27,19 +30,20 @@
 			</div>
 		</div>
 
-		<div v-if="event.haveRequest" class='event-body success' :class="{active: event.haveRequest}">
-			<div class='event-info'>
+		<!-- Информация в случае записи на мероприятие -->
+		<div v-if="event.haveRequest" class="event-body success" :class="{active: event.haveRequest}">
+			<div class="event-info">
 				Вы записаны на это мероприятие
-				<div class='success icon'></div>
+				<div class="success icon"></div>
 			</div>
 			
-			<div class='event-info'>
+			<div class="event-info">
 				<div>{{event.place}}</div>
 				<div>{{event.date}}</div>
 			</div>
 		</div>
 
-
+		<!-- Кнопка записаться/отменить запись -->
 		<div class="button" @click="changeRequest" :class="{cancel: event.haveRequest}">
 			<template v-if="event.haveRequest">отменить запись</template>
 			<template v-else @click="sendRequest">Записаться</template>
@@ -52,14 +56,15 @@ import axios from 'axios'
 
 export default {
 		name: 'eventCard',
-		props: ['event'],
+		props: ['event'], // должны приходить через Vuex
 		data () {
 			return {
-				loadedFlag: false,
+				//loadedFlag: false, // Не использется?
 				active: false,
 			}
 		},
 		computed: {
+			// Осталось мест
 			freeSpace: function(){
 				var free = this.event.userLimit - this.event.currentNum;
 				return  free > 0 ? free : 0;
@@ -69,6 +74,7 @@ export default {
 			
 		},
 		methods: {
+			// Изменение статуса записи
 			changeRequest: function(){
 				// если заявка на мероприятие не создана - создаем
 				if(!this.event.haveRequest){
@@ -78,10 +84,10 @@ export default {
 				else{
 					this.cancelRequest()
 				}
-				this.event.haveRequest = !this.event.haveRequest
-				
+				this.event.haveRequest = !this.event.haveRequest				
 			},
 
+			// Записаться
 			sendRequest: function(){
 				console.log('sendRequest')
 				axios({
@@ -98,6 +104,7 @@ export default {
 				})
 			},
 
+			// Отменить запись
 			cancelRequest: function(){
 				console.log('cancelRequest')
 				axios({
@@ -126,17 +133,18 @@ export default {
 </script>
 
 <style scoped>
-.event{
+/*
+  Стили карточки события
+*/
+
+.event {
 	display: flex;
-	/*! align-items: center; */
 	flex-direction: column;
 	box-shadow: 0 2px 5px rgba(0,0,0,.3);
 	background: white;
-	/*! padding: 8px 24px 0 24px; */
 	border-radius: 8px;
 	position: relative;
-	width: 350px;
-	
+	width: 350px;	
 	margin: 24px;
 	box-sizing: border-box;
 	justify-content: space-between;
@@ -148,12 +156,9 @@ export default {
 	font-family: Segoe UI;
 	text-align: center;
 	line-height: 1.8em;
-	/*! color: #4CAF50; */
 	height: 72px;
-	/*! background: #66BB6A; */
 	-webkit-user-select: none;
 	overflow: hidden;
-
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
 	width: 100%;
@@ -162,34 +167,33 @@ export default {
 }
 
 
-.event-body{
+.event-body {
 	display: flex;
 	padding: 15px 24px 22px 24px;
-	/*! width: 100%; */
 	box-sizing: border-box;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.event.active{
+.event.active {
 	transform: rotateY(180deg)
 }
 
-.event.active > *{
+.event.active > * {
 	transform: rotateY(180deg);
 }
 
-.event.active > .event-body:not(.active){
+.event.active > .event-body:not(.active) {
 	backface-visibility: hidden;
 	display: none;
 }
 
 
-.event-body.success{
+.event-body.success {
 	flex-direction: column;
 }
 
-.event-info{
+.event-info {
 	text-align: center;
 }
 
@@ -197,9 +201,7 @@ export default {
 	font-size: 22px;
 	font-family: Helvetica;
 	text-align: center;
-	/*!  */
 	color: #fff;
-	/*! height: 72px; */
 	background: #645394;
 	transition: background .1s;
 	cursor: pointer;
@@ -208,24 +210,21 @@ export default {
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	width: 100%;
-	/*! border-top: 1px solid #aaa; */
 	text-transform: uppercase;
-	/*! font-weight: bold; */
 	padding: 1em 0 1em;
-	/*!  */
 	align-self: flex-end;
 }
 
-.button:hover{
+.button:hover {
 	background: #7463A4;
 }
 
-.button.disabled{
+.button.disabled {
 	background: #607D8B !important;
 	cursor: not-allowed;
 }
 
-.button.cancel{
+.button.cancel {
 	background-color: #FF7043;
 	font-style: italic;
 	text-transform: none;

@@ -4,9 +4,7 @@ import eventPageMain from '@/components/eventPage/eventPageMain'
 import stat from '@/components/statPage/stat'
 import eventForm from '@/components/eventFormPage/eventForm'
 import animateNumber from 'vue-animate-number'
-import Vuex from 'vuex'
 
-Vue.use(Vuex)
 Vue.use(animateNumber)
 Vue.use(Router)
 

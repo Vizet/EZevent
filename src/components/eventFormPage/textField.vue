@@ -1,6 +1,7 @@
 <template>
-  <div class='mfield'>
-      <input class="mi fio" type="text" :value='value' @input='tfInput($event.target.value)' required> 
+  <!-- Поле для ввода -->
+  <div class="mfield">
+      <input class="mi fio" type="text" :value="value" @input="tfInput($event.target.value)" required> 
       <label class="mi-label">{{label}}</label>
       <div class="bar"></div>
   </div>
@@ -10,7 +11,7 @@
   export default {
     name: 'textField',
     props: ['label', 'value'],
-    data: function () {
+    data () {
       return {
 
       }
